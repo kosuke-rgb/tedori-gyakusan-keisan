@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>手取りから逆算!必要な額面年収計算ツール</title>
+<meta name="description" content="欲しい手取り額を入れるだけで、そのために必要な額面年収・額面月収の目安を逆算できる無料ツールです。転職・就活で「手取りで年収◯◯円欲しい」を額面に変換できます。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://webtools-labs.com/tedori-gyakusan-keisan/">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2370765779014113" crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NKK5TXCQEK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NKK5TXCQEK');
+</script>
+<script>
+(function () {
+  var fired = false;
+  function fireOnce() {
+    if (fired) return;
+    fired = true;
+    if (typeof gtag === 'function') gtag('event', 'tool_used', { tool_name: document.title });
+  }
+  document.addEventListener('input', fireOnce, true);
+  document.addEventListener('change', fireOnce, true);
+})();
+</script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230f766e'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle' fill='white' font-family='sans-serif'%3E%EF%BF%A5%3C/text%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="webtools-labs">
+<meta property="og:title" content="手取りから逆算!必要な額面年収計算ツール">
+<meta property="og:description" content="欲しい手取り額から、必要な額面年収・月収の目安を逆算できます。">
+<meta property="og:url" content="https://webtools-labs.com/tedori-gyakusan-keisan/">
+<meta property="og:image" content="https://webtools-labs.com/tedori-gyakusan-keisan/og-image.png">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="手取りから逆算する年収計算ツール">
+<meta name="twitter:description" content="欲しい手取り額から必要な額面年収をすぐ逆算できる無料ツール。">
+<meta name="twitter:image" content="https://webtools-labs.com/tedori-gyakusan-keisan/og-image.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "手取りから逆算する年収計算ツール",
+  "url": "https://webtools-labs.com/tedori-gyakusan-keisan/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "description": "欲しい手取り額から、必要な額面年収・額面月収の目安を逆算できる無料ツール。",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" },
+  "inLanguage": "ja"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "なぜ「手取り÷0.8」のような単純計算だとズレるんですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "所得税は課税所得が高いほど税率が上がる累進課税のため、額面が上がるほど手取り率（額面に対する手取りの割合）は少しずつ下がっていきます。「額面の75〜80%が手取り」という目安は年収400万〜600万円あたりでは当てはまりやすいですが、年収が上がるほど実際の手取り率はそれより低くなるため、単純な割り算では必要な額面を少なめに見積もってしまいます。" }
+    },
+    {
+      "@type": "Question",
+      "name": "ボーナス(賞与)を含めて計算していますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "本ツールは年間の総支給額（額面年収）ベースで逆算するため、ボーナスを含めた1年間の手取り合計から考えたい場合は、その金額をそのまま「欲しい手取り額」に入力してください。ただし賞与には月給と異なる社会保険料・源泉徴収の計算方法が使われるため、月々の手取りとボーナス時の手取りの内訳まで厳密に分けたい場合は目安としてご利用ください。" }
+    },
+    {
+      "@type": "Question",
+      "name": "「手取り計算ツール」との違いは何ですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "手取り計算ツールは「額面年収→手取り」を計算するのに対し、本ツールはその逆で「欲しい手取り→必要な額面年収」を逆算します。転職活動で「額面はいくらか」より「結局手取りでいくらもらえるか」を軸に考えたい場合に使えます。求人票の額面から手取りを知りたい場合は手取り計算ツールをご利用ください。" }
+    },
+    {
+      "@type": "Question",
+      "name": "転職活動で「手取りで年収500万円欲しい」というのはどういう意味ですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "求人票に書かれている年収は税金・社会保険料が引かれる前の額面であるため、実際に手元に残る金額（手取り）はそれより少なくなります。「手取りで年収500万円欲しい」という考え方は、生活費や貯蓄など実際に使える金額を基準に、そのために必要な額面年収（提示してほしい年収）を逆算する際によく使われます。" }
+    }
+  ]
+}
+</script>
+<style>
+:root {
+  --bg: #ffffff;
+  --surface-2: #f7f7f7;
+  --ink: #1a1a1a;
+  --muted: #767676;
+  --line: #e3e3e3;
+  --accent: #0f766e;
+  --best-bg: #f0f8f6;
+  --warn-bg: #fff7ed;
+  --warn-ink: #9a5b00;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+.page { max-width: 720px; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+header.masthead { margin-bottom: 1.5rem; }
+h1 {
+  font-weight: 700;
+  font-size: clamp(1.4rem, 4.5vw, 1.7rem);
+  margin: 0 0 0.7rem;
+  letter-spacing: 0.01em;
+}
+p.lede { color: var(--muted); margin: 0; max-width: 60ch; font-size: 0.95rem; }
+.updated-note { display: block; margin-top: 0.9rem; font-size: 0.78rem; color: var(--muted); }
+
+.notice-box {
+  background: var(--warn-bg); color: var(--warn-ink); border-radius: 8px;
+  padding: 0.9rem 1.1rem; font-size: 0.85rem; margin-bottom: 2rem;
+}
+
+section { margin-bottom: 2.5rem; }
+h2 { font-size: 1.05rem; font-weight: 700; margin: 0 0 1rem; }
+
+.field-row { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem; }
+.field { flex: 1; min-width: 160px; }
+.field label { display: block; font-size: 0.83rem; color: var(--muted); margin-bottom: 0.35rem; }
+.field input[type="number"], .field select {
+  width: 100%; font-variant-numeric: tabular-nums; font-size: 1.05rem; font-family: inherit;
+  padding: 0.55rem 0.7rem; border: 1px solid var(--line); border-radius: 6px;
+  background: var(--bg); color: var(--ink);
+}
+.field input:focus, .field select:focus { outline: none; border-color: var(--accent); }
+.field-hint { font-size: 0.76rem; color: var(--muted); margin-top: 0.3rem; }
+
+.summary-cards { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; }
+.summary-card {
+  flex: 1; min-width: 180px; background: var(--best-bg); border-radius: 10px;
+  padding: 1rem 1.2rem;
+}
+.summary-card .label { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.3rem; }
+.summary-card .value { font-size: 1.4rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.summary-card .sub { font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem; }
+
+table.compare { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+table.compare th, table.compare td {
+  padding: 0.55rem 0.5rem; text-align: right; border-bottom: 1px solid var(--line); vertical-align: top;
+}
+table.compare th:first-child, table.compare td:first-child { text-align: left; }
+table.compare thead th { color: var(--muted); font-weight: 500; font-size: 0.78rem; }
+table.compare td.num { font-variant-numeric: tabular-nums; }
+tr.best td { font-weight: 700; }
+tr.best { background: var(--best-bg); }
+tr.na td { color: var(--muted); }
+
+.disclaimer { font-size: 0.78rem; color: var(--muted); margin-top: 1rem; }
+
+.share-row { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.1rem; }
+.share-btn {
+  display: inline-flex; align-items: center; padding: 0.5rem 1rem; border-radius: 999px;
+  color: #fff; text-decoration: none; font-size: 0.82rem; font-weight: 700;
+}
+.share-btn:hover { opacity: 0.85; }
+.share-x { background: #000; }
+.share-line { background: #06c755; }
+.share-fb { background: #1877f2; }
+.share-hatena { background: #00a4de; }
+
+.ad-slot { margin: 2.5rem 0; text-align: center; min-height: 100px; }
+
+.pr-box {
+  border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 10px;
+  padding: 1.2rem 1.3rem; margin: 2.5rem 0; background: var(--best-bg);
+}
+.pr-box .pr-label {
+  display: inline-flex; align-items: center; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.04em;
+  color: #fff; background: var(--accent); border-radius: 999px;
+  padding: 0.2rem 0.7rem; margin-bottom: 0.8rem;
+}
+.pr-box p.pr-lede { color: var(--ink); font-size: 0.92rem; margin: 0 0 1rem; max-width: none; line-height: 1.7; }
+.pr-box .pr-banner { text-align: center; }
+
+.contact-box textarea {
+  width: 100%; min-height: 6rem; font-family: inherit; font-size: 0.92rem;
+  padding: 0.7rem; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink);
+  resize: vertical; margin-bottom: 0.6rem;
+}
+.contact-box input[type="email"] {
+  width: 100%; font-family: inherit; font-size: 0.92rem;
+  padding: 0.6rem 0.7rem; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--ink);
+  margin-bottom: 0.6rem;
+}
+.contact-box textarea:focus, .contact-box input:focus { outline: none; border-color: var(--accent); }
+.contact-box button {
+  font-family: inherit; font-weight: 700; font-size: 0.9rem; padding: 0.6rem 1.4rem;
+  border: none; border-radius: 6px; background: var(--accent); color: #fff; cursor: pointer;
+}
+.contact-box button:disabled { opacity: 0.5; cursor: not-allowed; }
+.contact-status { font-size: 0.85rem; margin-top: 0.6rem; }
+.contact-status.ok { color: var(--accent); }
+.contact-status.err { color: #b91c1c; }
+
+footer.site-footer {
+  margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line);
+  font-size: 0.78rem; color: var(--muted);
+}
+footer.site-footer p { margin: 0 0 0.5rem; }
+footer.site-footer a { color: var(--accent); }
+
+.faq-item { border-bottom: 1px solid var(--line); padding: 0.9rem 0; }
+.faq-item:last-child { border-bottom: none; }
+.faq-item summary {
+  cursor: pointer; font-weight: 700; font-size: 0.92rem; list-style: none;
+  position: relative; padding-right: 1.6rem;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: '+'; position: absolute; right: 0; top: 0; color: var(--accent); font-weight: 700; font-size: 1.1rem;
+}
+.faq-item[open] summary::after { content: '−'; }
+.faq-item p { margin: 0.7rem 0 0; color: var(--muted); font-size: 0.88rem; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="masthead">
+    <h1>手取りから逆算!必要な額面年収計算ツール</h1>
+    <p class="lede">欲しい手取り額を入れるだけで、そのために必要な額面年収・額面月収の目安を逆算します。転職・就活で「手取りで年収◯◯円欲しい」を額面に変換できます。</p>
+    <span class="updated-note">計算式 最終確認日: 2026年9月19日（手取り計算ツールと同じ税率・保険料率を使用）</span>
+  </header>
+
+  <div class="notice-box">
+    ⚠️ 「額面の75〜80%が手取り」という目安は年収が上がるほど不正確になります（累進課税のため）。本ツールは実際の税率・社会保険料率から逆算した目安で、扶養家族・各種控除は考慮していない簡易計算です。
+  </div>
+
+  <section>
+    <h2>欲しい手取り額から逆算</h2>
+    <div class="field-row">
+      <div class="field">
+        <label for="netTarget">欲しい手取り額（円）</label>
+        <input type="number" id="netTarget" min="0" step="10000" value="4000000">
+      </div>
+      <div class="field">
+        <label for="period">入力した金額の単位</label>
+        <select id="period">
+          <option value="year">年額</option>
+          <option value="month">月額</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="ageGroup">年齢区分</label>
+        <select id="ageGroup">
+          <option value="under40">40歳未満</option>
+          <option value="over40">40歳以上（介護保険料あり）</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="summary-cards" id="summaryCards"></div>
+
+    <div style="overflow-x:auto">
+      <table class="compare">
+        <thead>
+          <tr><th>項目</th><th class="num">年額</th><th class="num">月額目安</th></tr>
+        </thead>
+        <tbody id="resultBody"></tbody>
+      </table>
+    </div>
+    <p class="disclaimer">社会保険料は年収に対する概算率（40歳未満14.7%、40歳以上15.5%）で計算しています。実際の負担率は加入する健康保険組合・都道府県や標準報酬月額の区分により異なります。扶養家族がいる場合や各種控除がある場合は、実際に必要な額面はこれより少なくなることがあります。</p>
+    <div class="share-row" id="shareRow">
+      <a class="share-btn share-x" id="shareX" href="#" target="_blank" rel="noopener">𝕏でシェア</a>
+      <a class="share-btn share-line" id="shareLine" href="#" target="_blank" rel="noopener">LINEで送る</a>
+      <a class="share-btn share-fb" id="shareFb" href="#" target="_blank" rel="noopener">Facebookでシェア</a>
+      <a class="share-btn share-hatena" id="shareHatena" href="#" target="_blank" rel="noopener">はてブする</a>
+    </div>
+  </section>
+
+  <div class="ad-slot">
+    <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-2370765779014113"
+      data-ad-slot="3021985784"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <div class="pr-box">
+    <span class="pr-label">PR</span>
+    <p class="pr-lede">必要な額面が分かったら、日々の支払いの還元率も見直してみませんか。年会費無料で貯まりやすいカードなら、実質的な手取りアップにつながります。</p>
+    <div class="pr-banner">
+      <script type='text/javascript' src='https://ad-verification.a8.net/ad/js/brandsafe.js'></script>
+      <div id='div_admane_async_1734_658_2972'>
+      <script type='text/javascript'>
+      <!--
+      brandsafe_js_async('//ad-verification.a8.net/ad', '_site=1734&_article=658&_link=2972&_image=3219&_ns=1&sad=s00000015110002', '260907514413', '4BC5IY+6TW2E2+38L8+BXYE9');
+      //-->
+      </script>
+      </div>
+      <img border="0" width="1" height="1" src="https://www13.a8.net/0.gif?a8mat=4BC5IY+6TW2E2+38L8+BXYE9" alt="">
+    </div>
+  </div>
+
+  <section>
+    <h2>よくある質問</h2>
+    <details class="faq-item">
+      <summary>なぜ「手取り÷0.8」のような単純計算だとズレるんですか？</summary>
+      <p>所得税は課税所得が高いほど税率が上がる累進課税のため、額面が上がるほど手取り率（額面に対する手取りの割合）は少しずつ下がっていきます。「額面の75〜80%が手取り」という目安は年収400万〜600万円あたりでは当てはまりやすいですが、年収が上がるほど実際の手取り率はそれより低くなるため、単純な割り算では必要な額面を少なめに見積もってしまいます。</p>
+    </details>
+    <details class="faq-item">
+      <summary>ボーナス(賞与)を含めて計算していますか？</summary>
+      <p>本ツールは年間の総支給額（額面年収）ベースで逆算するため、ボーナスを含めた1年間の手取り合計から考えたい場合は、その金額をそのまま「欲しい手取り額」に入力してください。ただし賞与には月給と異なる社会保険料・源泉徴収の計算方法が使われるため、月々の手取りとボーナス時の手取りの内訳まで厳密に分けたい場合は目安としてご利用ください。</p>
+    </details>
+    <details class="faq-item">
+      <summary>「手取り計算ツール」との違いは何ですか？</summary>
+      <p>手取り計算ツールは「額面年収→手取り」を計算するのに対し、本ツールはその逆で「欲しい手取り→必要な額面年収」を逆算します。転職活動で「額面はいくらか」より「結局手取りでいくらもらえるか」を軸に考えたい場合に使えます。求人票の額面から手取りを知りたい場合は手取り計算ツールをご利用ください。</p>
+    </details>
+    <details class="faq-item">
+      <summary>転職活動で「手取りで年収500万円欲しい」というのはどういう意味ですか？</summary>
+      <p>求人票に書かれている年収は税金・社会保険料が引かれる前の額面であるため、実際に手元に残る金額（手取り）はそれより少なくなります。「手取りで年収500万円欲しい」という考え方は、生活費や貯蓄など実際に使える金額を基準に、そのために必要な額面年収（提示してほしい年収）を逆算する際によく使われます。</p>
+    </details>
+  </section>
+
+  <section class="contact-box">
+    <h2>ご意見・追加してほしい機能</h2>
+    <p class="lede" style="margin-bottom:0.9rem;">気づいたことや、あったら便利な機能があれば教えてください。</p>
+    <form id="contactForm">
+      <input type="email" id="contactEmail" placeholder="返信が必要な場合はメールアドレス（任意）">
+      <textarea id="contactMessage" placeholder="ご意見・ご要望をどうぞ" required></textarea>
+      <button type="submit" id="contactSubmit">送信する</button>
+      <p class="contact-status" id="contactStatus"></p>
+    </form>
+  </section>
+
+  <footer class="site-footer">
+    <p>本ツールの金額は概算率にもとづく簡易な逆算であり、正確性を保証するものではありません。扶養控除・住宅ローン控除等の各種控除は考慮していません。正確な金額は給与明細・源泉徴収票や勤務先の給与担当にご確認ください。</p>
+    <p>あわせて使える：
+      <a href="https://webtools-labs.com/furima-hikaku-keisan/">フリマ手数料計算・比較ツール</a> ／
+      <a href="https://webtools-labs.com/furima-hasso-hikaku/">フリマ配送方法・送料比較ツール</a> ／
+      <a href="https://webtools-labs.com/furima-tedori-simulator/">フリマ手取りシミュレーター</a> ／
+      <a href="https://webtools-labs.com/yukyu-hiyou-keisan/">有給休暇 付与日数計算ツール</a> ／
+      <a href="https://webtools-labs.com/revolving-risoku-keisan/">リボ払い・分割払い 実質利息計算ツール</a> ／
+      <a href="https://webtools-labs.com/taishoku-yukyu-keisan/">退職時の有給消化シミュレーター</a> ／
+      <a href="https://webtools-labs.com/fuyou-no-kabe-keisan/">扶養の壁チェッカー</a> ／
+      <a href="https://webtools-labs.com/tedori-keisan/">手取り計算ツール</a> ／
+      <a href="https://webtools-labs.com/taishokukin-zei-keisan/">退職金の税金計算ツール</a> ／
+      <a href="https://webtools-labs.com/sankyu-ikuji-teate-keisan/">産休・育休手当金シミュレーター</a> ／
+      <a href="https://webtools-labs.com/zangyodai-keisan/">残業代計算ツール</a> ／
+      <a href="https://webtools-labs.com/shitsugyo-hoken-keisan/">失業保険（基本手当）シミュレーター</a> ／
+      <a href="https://webtools-labs.com/jikyu-nenshu-keisan/">時給から年収・月収を計算</a> ／
+      <a href="https://webtools-labs.com/yubin-kitte-keisan/">郵便物の切手代早見表</a> ／
+      <a href="https://webtools-labs.com/bonus-tedori-keisan/">賞与手取り計算ツール</a> ／
+      <a href="https://webtools-labs.com/shoubyou-teate-keisan/">傷病手当金計算ツール</a> ／
+      <a href="https://webtools-labs.com/juminzei-keisan/">住民税計算ツール</a> ／
+      <a href="https://webtools-labs.com/tsukin-teate-keisan/">通勤手当の非課税限度額計算ツール</a>
+    </p>
+    <p>当サイトは広告を掲載する場合があります。</p>
+    <p><a href="https://webtools-labs.com/about/">運営者情報</a> ／ <a href="https://webtools-labs.com/privacy/">プライバシーポリシー</a></p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  function yen(n) { return Math.round(n).toLocaleString('ja-JP') + '円'; }
+
+  function salaryDeduction(income) {
+    if (income <= 1625000) return 550000;
+    if (income <= 1800000) return Math.round(income * 0.4 - 100000);
+    if (income <= 3600000) return Math.round(income * 0.3 + 80000);
+    if (income <= 6600000) return Math.round(income * 0.2 + 440000);
+    if (income <= 8500000) return Math.round(income * 0.1 + 1100000);
+    return 1950000;
+  }
+
+  function socialInsurance(income, ageGroup) {
+    var rate = ageGroup === 'over40' ? 0.155 : 0.147;
+    return Math.round(income * rate);
+  }
+
+  function incomeTax(taxableIncome) {
+    var t = Math.max(0, taxableIncome);
+    var base;
+    if (t <= 1950000) base = t * 0.05;
+    else if (t <= 3300000) base = t * 0.10 - 97500;
+    else if (t <= 6950000) base = t * 0.20 - 427500;
+    else if (t <= 9000000) base = t * 0.23 - 636000;
+    else if (t <= 18000000) base = t * 0.33 - 1536000;
+    else if (t <= 40000000) base = t * 0.40 - 2796000;
+    else base = t * 0.45 - 4796000;
+    base = Math.max(0, base);
+    return Math.round(base * 1.021);
+  }
+
+  function residentTax(income, socialIns) {
+    var salaryIncome = Math.max(0, income - salaryDeduction(income));
+    var taxableForResident = Math.max(0, salaryIncome - socialIns - 430000);
+    return Math.round(taxableForResident * 0.10 + 5000);
+  }
+
+  function calc(income, ageGroup) {
+    var salaryIncome = Math.max(0, income - salaryDeduction(income));
+    var socialIns = socialInsurance(income, ageGroup);
+    var taxableForIncomeTax = Math.max(0, salaryIncome - socialIns - 480000);
+    var incTax = incomeTax(taxableForIncomeTax);
+    var resTax = residentTax(income, socialIns);
+    var netIncome = income - socialIns - incTax - resTax;
+    return { income: income, socialIns: socialIns, incTax: incTax, resTax: resTax, netIncome: netIncome };
+  }
+
+  function reverseCalc(targetNet, ageGroup) {
+    var lo = 0, hi = 200000000;
+    for (var i = 0; i < 60; i++) {
+      var mid = (lo + hi) / 2;
+      if (calc(mid, ageGroup).netIncome < targetNet) lo = mid; else hi = mid;
+    }
+    return Math.round(hi);
+  }
+
+  var netTargetInput = document.getElementById('netTarget');
+  var periodSelect = document.getElementById('period');
+  var ageGroupSelect = document.getElementById('ageGroup');
+  var summaryCards = document.getElementById('summaryCards');
+  var resultBody = document.getElementById('resultBody');
+  var shareX = document.getElementById('shareX');
+  var shareLine = document.getElementById('shareLine');
+  var shareFb = document.getElementById('shareFb');
+  var shareHatena = document.getElementById('shareHatena');
+
+  function setShareLinks(text, url) {
+    shareX.href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url);
+    shareLine.href = 'https://line.me/R/msg/text/?' + encodeURIComponent(text + '\n' + url);
+    shareFb.href = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url) + '&quote=' + encodeURIComponent(text);
+    shareHatena.href = 'https://b.hatena.ne.jp/entry/panel/?url=' + encodeURIComponent(url) + '&title=' + encodeURIComponent(text);
+  }
+
+  function render() {
+    var rawTarget = Math.max(0, Number(netTargetInput.value) || 0);
+    var period = periodSelect.value;
+    var ageGroup = ageGroupSelect.value;
+    var targetNetYear = period === 'month' ? rawTarget * 12 : rawTarget;
+
+    var income = reverseCalc(targetNetYear, ageGroup);
+    var r = calc(income, ageGroup);
+
+    summaryCards.innerHTML =
+      '<div class="summary-card"><div class="label">必要な額面年収</div><div class="value">' + yen(r.income) + '</div><div class="sub">欲しい手取り年収 ' + yen(targetNetYear) + '</div></div>' +
+      '<div class="summary-card"><div class="label">必要な額面月収</div><div class="value">' + yen(r.income / 12) + '</div><div class="sub">単純に12等分した目安</div></div>';
+
+    var rows = [
+      ['額面年収（必要額）', yen(r.income), yen(r.income / 12)],
+      ['社会保険料', '－' + yen(r.socialIns), '－' + yen(r.socialIns / 12)],
+      ['所得税（復興特別所得税込み）', '－' + yen(r.incTax), '－' + yen(r.incTax / 12)],
+      ['住民税', '－' + yen(r.resTax), '－' + yen(r.resTax / 12)],
+      ['手取り（確認用）', yen(r.netIncome), yen(r.netIncome / 12)]
+    ];
+    resultBody.innerHTML = rows.map(function (row, i) {
+      var isLast = i === rows.length - 1;
+      return '<tr class="' + (isLast ? 'best' : '') + '"><td>' + row[0] + '</td><td class="num">' + row[1] + '</td><td class="num">' + row[2] + '</td></tr>';
+    }).join('');
+
+    var shareText = '手取り' + yen(targetNetYear) + '欲しい場合\n必要な額面年収は ' + yen(r.income) + '(月換算 ' + yen(r.income / 12) + ')でした\n\n手取りから逆算する年収計算ツール';
+    setShareLinks(shareText, 'https://webtools-labs.com/tedori-gyakusan-keisan/');
+  }
+
+  netTargetInput.addEventListener('input', render);
+  periodSelect.addEventListener('change', render);
+  ageGroupSelect.addEventListener('change', render);
+
+  render();
+
+  var WEB3FORMS_ACCESS_KEY = '4551c9fd-4327-4bd4-97e0-8b93d85fd077';
+  var contactForm = document.getElementById('contactForm');
+  var contactStatus = document.getElementById('contactStatus');
+  var contactSubmit = document.getElementById('contactSubmit');
+
+  contactForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    contactSubmit.disabled = true;
+    contactStatus.textContent = '送信中...';
+    contactStatus.className = 'contact-status';
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_ACCESS_KEY,
+        subject: '手取り逆算計算ツールへのお問い合わせ',
+        email: document.getElementById('contactEmail').value || 'noreply@example.com',
+        message: document.getElementById('contactMessage').value
+      })
+    }).then(function (res) { return res.json(); }).then(function (data) {
+      contactSubmit.disabled = false;
+      if (data.success) {
+        contactStatus.textContent = '送信しました。ありがとうございます！';
+        contactStatus.className = 'contact-status ok';
+        contactForm.reset();
+      } else {
+        contactStatus.textContent = '送信に失敗しました。時間をおいて再度お試しください。';
+        contactStatus.className = 'contact-status err';
+      }
+    }).catch(function () {
+      contactSubmit.disabled = false;
+      contactStatus.textContent = '送信に失敗しました。時間をおいて再度お試しください。';
+      contactStatus.className = 'contact-status err';
+    });
+  });
+})();
+</script>
+</body>
+</html>
