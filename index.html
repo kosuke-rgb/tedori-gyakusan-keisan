@@ -78,6 +78,16 @@
       "@type": "Question",
       "name": "転職活動で「手取りで年収500万円欲しい」というのはどういう意味ですか？",
       "acceptedAnswer": { "@type": "Answer", "text": "求人票に書かれている年収は税金・社会保険料が引かれる前の額面であるため、実際に手元に残る金額（手取り）はそれより少なくなります。「手取りで年収500万円欲しい」という考え方は、生活費や貯蓄など実際に使える金額を基準に、そのために必要な額面年収（提示してほしい年収）を逆算する際によく使われます。" }
+    },
+    {
+      "@type": "Question",
+      "name": "複数の内定・オファーを手取りベースで比較するにはどうすればいいですか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "各社の提示額面をそれぞれ当サイトの手取り計算ツールで手取りに変換し、その手取り額同士を比較するのが最も正確です。逆に「これだけの手取りが欲しい」という最低ラインが先にある場合は、本ツールでそのラインに必要な額面を逆算し、各社の提示額面と比べる使い方もできます。" }
+    },
+    {
+      "@type": "Question",
+      "name": "新卒1年目で住民税がかからない場合、この計算はどうなりますか？",
+      "acceptedAnswer": { "@type": "Answer", "text": "本ツールは「その年収が継続した場合の定常状態」を前提に、住民税も含めて逆算しています。新卒1年目など住民税がかからない期間は、同じ額面でも本ツールの計算より実際の手取りは多くなるため、1年目だけで見れば、ここで示す必要額面より少ない額面でも目標の手取りに届く可能性があります。" }
     }
   ]
 }
@@ -152,6 +162,12 @@ table.compare td.num { font-variant-numeric: tabular-nums; }
 tr.best td { font-weight: 700; }
 tr.best { background: var(--best-bg); }
 tr.na td { color: var(--muted); }
+
+.ref-table { overflow-x: auto; }
+.ref-table table { width: 100%; border-collapse: collapse; font-size: 0.86rem; min-width: 460px; }
+.ref-table th, .ref-table td { padding: 0.5rem 0.5rem; border-bottom: 1px solid var(--line); text-align: left; }
+.ref-table td.num { font-variant-numeric: tabular-nums; text-align: right; }
+.ref-table tr.best td { font-weight: 700; background: var(--best-bg); }
 
 .disclaimer { font-size: 0.78rem; color: var(--muted); margin-top: 1rem; }
 
@@ -234,6 +250,12 @@ footer.site-footer a { color: var(--accent); }
   </div>
 
   <section>
+    <h2>「手取りで年収◯◯円」を額面に変換する意味</h2>
+    <p>転職や就職活動では、生活費や貯蓄計画から逆算して「手取りで最低〇〇円は欲しい」という基準を先に決めることがよくあります。しかし求人票や内定通知に書かれているのは税金・社会保険料が引かれる前の額面年収であるため、そのままでは「自分の希望を満たす年収なのか」が判断しにくくなります。</p>
+    <p>本ツールは、この「欲しい手取り」を起点に、逆算で必要な額面年収を求めるためのものです。単純に手取りを0.8で割るような概算は、累進課税の影響で年収が上がるほど誤差が大きくなるため、本ツールでは実際の税率・社会保険料率を使い、二分探索という手法で目標の手取り額に一致する額面を精度良く求めています。</p>
+  </section>
+
+  <section>
     <h2>欲しい手取り額から逆算</h2>
     <div class="field-row">
       <div class="field">
@@ -273,6 +295,24 @@ footer.site-footer a { color: var(--accent); }
       <a class="share-btn share-fb" id="shareFb" href="#" target="_blank" rel="noopener">Facebookでシェア</a>
       <a class="share-btn share-hatena" id="shareHatena" href="#" target="_blank" rel="noopener">はてブする</a>
     </div>
+  </section>
+
+  <section>
+    <h2>計算例: 手取り年収400万円が欲しい場合(40歳未満)</h2>
+    <p>デフォルトで入力されている条件で逆算してみます。</p>
+    <div class="ref-table">
+      <table>
+        <thead><tr><th>項目</th><th class="num">金額</th></tr></thead>
+        <tbody>
+          <tr class="best"><td>必要な額面年収</td><td class="num">5,165,564円</td></tr>
+          <tr><td>① 社会保険料(概算14.7%)</td><td class="num">▲759,338円</td></tr>
+          <tr><td>② 所得税(復興特別所得税込み)</td><td class="num">▲150,915円</td></tr>
+          <tr><td>③ 住民税</td><td class="num">▲255,311円</td></tr>
+          <tr><td>手取り(確認用、額面−①−②−③)</td><td class="num">4,000,000円</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="disclaimer">手取り400万円を得るには、額面で約516.6万円が必要という計算です。単純に「400万円÷0.8=500万円」と概算すると、実際に必要な額面より少なく見積もってしまうことが分かります。</p>
   </section>
 
   <div class="ad-slot">
@@ -318,6 +358,14 @@ footer.site-footer a { color: var(--accent); }
     <details class="faq-item">
       <summary>転職活動で「手取りで年収500万円欲しい」というのはどういう意味ですか？</summary>
       <p>求人票に書かれている年収は税金・社会保険料が引かれる前の額面であるため、実際に手元に残る金額（手取り）はそれより少なくなります。「手取りで年収500万円欲しい」という考え方は、生活費や貯蓄など実際に使える金額を基準に、そのために必要な額面年収（提示してほしい年収）を逆算する際によく使われます。</p>
+    </details>
+    <details class="faq-item">
+      <summary>複数の内定・オファーを手取りベースで比較するにはどうすればいいですか？</summary>
+      <p>各社の提示額面をそれぞれ当サイトの手取り計算ツールで手取りに変換し、その手取り額同士を比較するのが最も正確です。逆に「これだけの手取りが欲しい」という最低ラインが先にある場合は、本ツールでそのラインに必要な額面を逆算し、各社の提示額面と比べる使い方もできます。</p>
+    </details>
+    <details class="faq-item">
+      <summary>新卒1年目で住民税がかからない場合、この計算はどうなりますか？</summary>
+      <p>本ツールは「その年収が継続した場合の定常状態」を前提に、住民税も含めて逆算しています。新卒1年目など住民税がかからない期間は、同じ額面でも本ツールの計算より実際の手取りは多くなるため、1年目だけで見れば、ここで示す必要額面より少ない額面でも目標の手取りに届く可能性があります。</p>
     </details>
   </section>
 
