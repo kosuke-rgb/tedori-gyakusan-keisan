@@ -242,7 +242,7 @@ footer.site-footer a { color: var(--accent); }
   <header class="masthead">
     <h1>手取りから逆算!必要な額面年収計算ツール</h1>
     <p class="lede">欲しい手取り額を入れるだけで、そのために必要な額面年収・額面月収の目安を逆算します。転職・就活で「手取りで年収◯◯円欲しい」を額面に変換できます。</p>
-    <span class="updated-note">計算式 最終確認日: 2026年9月19日（手取り計算ツールと同じ税率・保険料率を使用）</span>
+    <span class="updated-note">計算式 最終確認日: 2026年9月27日（手取り計算ツールと同じ税率・保険料率を使用、令和7・8年度税制改正に対応済み）</span>
   </header>
 
   <div class="notice-box">
@@ -304,15 +304,15 @@ footer.site-footer a { color: var(--accent); }
       <table>
         <thead><tr><th>項目</th><th class="num">金額</th></tr></thead>
         <tbody>
-          <tr class="best"><td>必要な額面年収</td><td class="num">5,165,564円</td></tr>
-          <tr><td>① 社会保険料(概算14.7%)</td><td class="num">▲759,338円</td></tr>
-          <tr><td>② 所得税(復興特別所得税込み)</td><td class="num">▲150,915円</td></tr>
-          <tr><td>③ 住民税</td><td class="num">▲255,311円</td></tr>
+          <tr class="best"><td>必要な額面年収</td><td class="num">5,137,244円</td></tr>
+          <tr><td>① 社会保険料(概算14.7%)</td><td class="num">▲755,175円</td></tr>
+          <tr><td>② 所得税(復興特別所得税込み)</td><td class="num">▲128,607円</td></tr>
+          <tr><td>③ 住民税</td><td class="num">▲253,462円</td></tr>
           <tr><td>手取り(確認用、額面−①−②−③)</td><td class="num">4,000,000円</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="disclaimer">手取り400万円を得るには、額面で約516.6万円が必要という計算です。単純に「400万円÷0.8=500万円」と概算すると、実際に必要な額面より少なく見積もってしまうことが分かります。</p>
+    <p class="disclaimer">手取り400万円を得るには、額面で約513.7万円が必要という計算です。単純に「400万円÷0.8=500万円」と概算すると、実際に必要な額面より少なく見積もってしまうことが分かります。</p>
   </section>
 
   <div class="ad-slot">
@@ -415,13 +415,22 @@ footer.site-footer a { color: var(--accent); }
 (function () {
   function yen(n) { return Math.round(n).toLocaleString('ja-JP') + '円'; }
 
+  // 給与所得控除（令和8年分以後。国税庁タックスアンサーNo.1410にもとづく）
   function salaryDeduction(income) {
-    if (income <= 1625000) return 550000;
-    if (income <= 1800000) return Math.round(income * 0.4 - 100000);
+    if (income <= 2200000) return 740000;
     if (income <= 3600000) return Math.round(income * 0.3 + 80000);
     if (income <= 6600000) return Math.round(income * 0.2 + 440000);
     if (income <= 8500000) return Math.round(income * 0.1 + 1100000);
     return 1950000;
+  }
+
+  // 所得税の基礎控除（令和7・8年分の時限措置。国税庁「基礎控除の見直し等」にもとづく）
+  function basicDeduction(salaryIncome) {
+    if (salaryIncome <= 1320000) return 950000;
+    if (salaryIncome <= 3360000) return 880000;
+    if (salaryIncome <= 4890000) return 680000;
+    if (salaryIncome <= 6550000) return 630000;
+    return 580000;
   }
 
   function socialInsurance(income, ageGroup) {
@@ -452,7 +461,7 @@ footer.site-footer a { color: var(--accent); }
   function calc(income, ageGroup) {
     var salaryIncome = Math.max(0, income - salaryDeduction(income));
     var socialIns = socialInsurance(income, ageGroup);
-    var taxableForIncomeTax = Math.max(0, salaryIncome - socialIns - 480000);
+    var taxableForIncomeTax = Math.max(0, salaryIncome - socialIns - basicDeduction(salaryIncome));
     var incTax = incomeTax(taxableForIncomeTax);
     var resTax = residentTax(income, socialIns);
     var netIncome = income - socialIns - incTax - resTax;
